@@ -10,9 +10,44 @@
             height: 600px;
             width: 100%;
         }
+        /* Style de la légende */
+        .legend {
+            background-color: white;
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 1000;
+        }
+        .legend h4 {
+            margin: 0;
+            font-size: 16px;
+        }
+        .legend div {
+            margin-bottom: 8px;
+        }
+        .legend img {
+            vertical-align: middle;
+            margin-right: 8px;
+        }
     </style>
 </head>
 <body>
+
+<!-- Légende -->
+<div class="legend">
+    <h4>Légende</h4>
+    <div>
+        <img src="https://banner2.cleanpng.com/20180703/gsl/kisspng-house-computer-icons-real-estate-green-home-clip-a-5b3bd4580fbdf5.7984910215306476400645.jpg" alt="Punaise bleue" width="25" height="41">
+        <span>Punaise bleue : Villes principales</span>
+    </div>
+    <div>
+        <img src="https://banner2.cleanpng.com/20190716/tsy/kisspng-portable-network-graphics-computer-icons-clip-art-5d2e77f2de3388.4871909515633264509102.jpg" alt="Punaise rouge" width="25" height="41">
+        <span>Punaise rouge : Villes secondaires</span>
+    </div>
+</div>
 
 <div id="map"></div>
 
@@ -80,14 +115,14 @@
 
     // Ajout des punaises bleues
     blueCities.forEach(function(city) {
-        L.marker([city.lat, city.lon], {icon: L.icon({iconUrl: 'https://upload.wikimedia.org/wikipedia/commons/a/ab/Blue_pin.svg', iconSize: [25, 41], iconAnchor: [12, 41]})})
+        L.marker([city.lat, city.lon], {icon: L.icon({iconUrl: 'https://banner2.cleanpng.com/20180703/gsl/kisspng-house-computer-icons-real-estate-green-home-clip-a-5b3bd4580fbdf5.7984910215306476400645.jpg', iconSize: [25, 41], iconAnchor: [12, 41]})})
             .addTo(map)
             .bindPopup(city.name);
     });
 
     // Ajout des punaises rouges
     redCities.forEach(function(city) {
-        L.marker([city.lat, city.lon], {icon: L.icon({iconUrl: 'https://upload.wikimedia.org/wikipedia/commons/6/6b/Red_pin.svg', iconSize: [25, 41], iconAnchor: [12, 41]})})
+        L.marker([city.lat, city.lon], {icon: L.icon({iconUrl: 'https://banner2.cleanpng.com/20190716/tsy/kisspng-portable-network-graphics-computer-icons-clip-art-5d2e77f2de3388.4871909515633264509102.jpg', iconSize: [25, 41], iconAnchor: [12, 41]})})
             .addTo(map)
             .bindPopup(city.name);
     });
