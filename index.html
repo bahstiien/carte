@@ -41,11 +41,15 @@
     <h4>Légende</h4>
     <div>
         <img src="https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-256.png" alt="Punaise bleue" width="25" height="41">
-        <span>Punaise Rouge : Sites loués</span>
+        <span>Punaise Bleue : Sites détenus</span>
     </div>
     <div>
         <img src="https://cdn.iconfinder.com/stored_data/2262842/128/png?token=1747933005-lyVbytEz7SS5iJewwxtJACyeJiAPJ5ps1tbTWu2cQE4%3D" alt="Punaise rouge" width="25" height="41">
-        <span>Punaise Bleu : Sites détenus</span>
+        <span>Punaise Rouge : Sites loués</span>
+    </div>
+    <div>
+        <img src="https://cdn.iconfinder.com/stored_data/2262931/128/png?token=1747938463-CuIOaBQAIG3Ea2VTMWLTe4ZoeRFAdeQLMCxyaKr2W90%3D" alt="Punaise verte" width="25" height="41">
+        <span>Punaise Verte : Villes en doublon</span>
     </div>
 </div>
 
@@ -113,18 +117,43 @@
         {name: "LUDON MEDOC", lat: 45.0294, lon: -0.7413}
     ];
 
-    // Ajout des punaises bleues
-    blueCities.forEach(function(city) {
-        L.marker([city.lat, city.lon], {icon: L.icon({iconUrl: 'https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-256.png', iconSize: [25, 41], iconAnchor: [12, 41]})})
+    // Identifie les doublons entre les deux listes
+    var allCities = blueCities.concat(redCities);
+    var seenCities = {};
+    var duplicateCities = [];
+
+    allCities.forEach(function(city) {
+        if (seenCities[city.name]) {
+            duplicateCities.push(city);
+        } else {
+            seenCities[city.name] = true;
+        }
+    });
+
+    // Ajout des punaises
+    function addMarker(city, iconUrl) {
+        L.marker([city.lat, city.lon], {icon: L.icon({iconUrl: iconUrl, iconSize: [25, 41], iconAnchor: [12, 41]})})
             .addTo(map)
             .bindPopup(city.name);
+    }
+
+    // Ajout des punaises bleues
+    blueCities.forEach(function(city) {
+        if (!duplicateCities.includes(city)) {
+            addMarker(city, 'https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-256.png');
+        }
     });
 
     // Ajout des punaises rouges
     redCities.forEach(function(city) {
-        L.marker([city.lat, city.lon], {icon: L.icon({iconUrl: 'https://cdn.iconfinder.com/stored_data/2262842/128/png?token=1747933005-lyVbytEz7SS5iJewwxtJACyeJiAPJ5ps1tbTWu2cQE4%3D', iconSize: [25, 41], iconAnchor: [12, 41]})})
-            .addTo(map)
-            .bindPopup(city.name);
+        if (!duplicateCities.includes(city)) {
+            addMarker(city, 'https://cdn.iconfinder.com/stored_data/2262842/128/png?token=1747933005-lyVbytEz7SS5iJewwxtJACyeJiAPJ5ps1tbTWu2cQE4%3D');
+        }
+    });
+
+    // Ajout des punaises vertes pour les doublons
+    duplicateCities.forEach(function(city) {
+        addMarker(city, 'https://cdn.iconfinder.com/stored_data/2262931/128/png?token=1747938463-CuIOaBQAIG3Ea2VTMWLTe4ZoeRFAdeQLMCxyaKr2W90%3D');
     });
 </script>
 
