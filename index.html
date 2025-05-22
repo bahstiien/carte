@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carte des villes avec punaises</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 600px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+    // Création de la carte centrée sur la France
+    var map = L.map('map').setView([46.603354, 1.888334], 6);
+
+    // Ajout de la couche de fond
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Liste des villes avec punaises bleues
+    var blueCities = [
+        {name: "ORIOLLES", lat: 45.6863, lon: -0.0856},
+        {name: "JARNAC", lat: 45.7131, lon: -0.3312},
+        {name: "LUDON MEDOC", lat: 45.0294, lon: -0.7413},
+        {name: "BARBEZIEUX SAINT HILAIRE", lat: 45.5094, lon: -0.1969},
+        {name: "COGNAC", lat: 45.6980, lon: -0.3277},
+        {name: "MARSANNAY-LA-COTE", lat: 47.1215, lon: 4.9981},
+        {name: "LA CHARITE SUR LOIRE", lat: 47.0803, lon: 3.0904},
+        {name: "SIGOGNE", lat: 45.7596, lon: -0.2302},
+        {name: "SAINT MARTIN DU PUY", lat: 47.0529, lon: 3.4299},
+        {name: "APT", lat: 43.8803, lon: 5.4055},
+        {name: "MURLIN", lat: 47.2460, lon: 3.3624},
+        {name: "MACON", lat: 46.3036, lon: 4.8283},
+        {name: "BARRET", lat: 45.7849, lon: 0.1812},
+        {name: "CHATEAUBERNARD", lat: 45.7304, lon: -0.1585},
+        {name: "GENSAC LA PALLUE", lat: 45.0505, lon: -0.1471},
+        {name: "BORDEAUX", lat: 44.8378, lon: -0.5792},
+        {name: "PARIS", lat: 48.8566, lon: 2.3522},
+        {name: "SAINT PANTALEON DE LARCHE", lat: 45.0950, lon: 1.5986},
+        {name: "PIEGUT-PLUVIERS", lat: 45.4684, lon: 0.6563}
+    ];
+
+    // Liste des villes avec punaises rouges
+    var redCities = [
+        {name: "TERRES DE HAUTE CHARENTE", lat: 45.9462, lon: 0.7041},
+        {name: "SIGOGNE", lat: 45.7596, lon: -0.2302},
+        {name: "LUDON MEDOC", lat: 45.0294, lon: -0.7413},
+        {name: "COGNAC", lat: 45.6980, lon: -0.3277},
+        {name: "PARIGNY-LES-VAUX", lat: 47.0350, lon: 3.0919},
+        {name: "NARCY", lat: 47.0533, lon: 3.3950},
+        {name: "FONTAINE", lat: 47.7971, lon: 3.2183},
+        {name: "SAINPUITS", lat: 47.8033, lon: 3.4884},
+        {name: "GIRY", lat: 47.0533, lon: 3.1539},
+        {name: "CRUX LA VILLE", lat: 47.1137, lon: 3.2812},
+        {name: "ALLUY", lat: 47.0770, lon: 3.5401},
+        {name: "LA CHARITE SUR LOIRE", lat: 47.0803, lon: 3.0904},
+        {name: "VARZY", lat: 47.3206, lon: 3.3801},
+        {name: "LA CHAPELLE SAINT ANDRE", lat: 47.3192, lon: 3.3493},
+        {name: "SAINT MARTIN DU PUY", lat: 47.0529, lon: 3.4299},
+        {name: "MURLIN", lat: 47.2460, lon: 3.3624},
+        {name: "BARRET", lat: 45.7849, lon: 0.1812},
+        {name: "GENSAC LA PALLUE", lat: 45.0505, lon: -0.1471},
+        {name: "GENOUILLAC", lat: 45.6585, lon: 0.4365},
+        {name: "SAINT PANTALEON DE LARCHE", lat: 45.0950, lon: 1.5986},
+        {name: "LIGNIERES SONNEVILLE", lat: 45.2994, lon: -0.0852},
+        {name: "VARZY", lat: 47.3206, lon: 3.3801},
+        {name: "GENOUILLAC", lat: 45.6585, lon: 0.4365},
+        {name: "ETAIS LA SAUVIN", lat: 47.4995, lon: 3.2892},
+        {name: "LUDON MEDOC", lat: 45.0294, lon: -0.7413}
+    ];
+
+    // Ajout des punaises bleues
+    blueCities.forEach(function(city) {
+        L.marker([city.lat, city.lon], {icon: L.icon({iconUrl: 'https://upload.wikimedia.org/wikipedia/commons/a/ab/Blue_pin.svg', iconSize: [25, 41], iconAnchor: [12, 41]})})
+            .addTo(map)
+            .bindPopup(city.name);
+    });
+
+    // Ajout des punaises rouges
+    redCities.forEach(function(city) {
+        L.marker([city.lat, city.lon], {icon: L.icon({iconUrl: 'https://upload.wikimedia.org/wikipedia/commons/6/6b/Red_pin.svg', iconSize: [25, 41], iconAnchor: [12, 41]})})
+            .addTo(map)
+            .bindPopup(city.name);
+    });
+</script>
+
+</body>
+</html>
