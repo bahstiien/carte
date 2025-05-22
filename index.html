@@ -40,7 +40,7 @@
 <div class="legend">
     <h4>Légende</h4>
     <div>
-        <img src="https://www.iconfinder.com/icons/5094676/gps_location_navigation_pin_icon" alt="Punaise bleue" width="25" height="41">
+        <img src="https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-256.png" alt="Punaise bleue" width="25" height="41">
         <span>Punaise bleue : Sites loués</span>
     </div>
     <div>
@@ -115,7 +115,7 @@
 
     // Ajout des punaises bleues
     blueCities.forEach(function(city) {
-        L.marker([city.lat, city.lon], {icon: L.icon({iconUrl: 'https://banner2.cleanpng.com/20180703/gsl/kisspng-house-computer-icons-real-estate-green-home-clip-a-5b3bd4580fbdf5.7984910215306476400645.jpg', iconSize: [25, 41], iconAnchor: [12, 41]})})
+        L.marker([city.lat, city.lon], {icon: L.icon({iconUrl: 'https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-256.png', iconSize: [25, 41], iconAnchor: [12, 41]})})
             .addTo(map)
             .bindPopup(city.name);
     });
